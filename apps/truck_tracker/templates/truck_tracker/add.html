@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Add a Truck</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"> {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'truck_tracker/css/main.css' %}" media="screen" title="no title" charset="utf-8">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+
+    <script src="{% static 'truck_tracker/js/script.js' %}"></script>
+</head>
+
+<body>
+    <!-- header-->
+    <div class="pusher">
+
+        <div class="ui inverted vertical masthead center aligned segment">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+            </ul>
+            {% endif %}
+
+            <div class="ui container">
+                <div class="ui large secondary inverted pointing menu">
+                    <a class="toc item">
+                      <i class="sidebar icon"></i>
+                    </a>
+                    <a class="item" href="/">Home</a>
+                    <a class="item" href="/trucks">Trucks</a>
+                    <a class="active item" href="/add_truck">Add a Truck</a>
+                    <div class="right item">
+                        {% if request.session.user_id %}
+                        <a class="ui inverted button loginBtn" href="/logout">logout</a>
+                        {% else %}
+                        <a class="ui inverted button loginBtn">Login</a>
+                        <a class="ui inverted button regBtn">Register</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui text container">
+                <h1>JD's Monster Jam Truck Tracker</h1>
+                <h3>To Add A New Truck, Please Fill Out The Form</h3>
+
+            </div>
+        </div>
+    </div>
+        <!-- end of header -->
+        <!-- begining of modal -->
+        {% include "truck_tracker/modal.html" %}
+        <!-- end of modal -->
+        <!-- form-->
+    <div class="ui center aligned container">
+        <h3>Select a Category</h3>
+
+        <form action="/add" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="ui form">
+                <select name="category">
+                {% for category in truck_categories %}
+                <option value="{{category.category_name}}">{{category.category_name}}</option>
+                {% endfor %}
+                </select>
+
+                <div class="inline fields">
+                    <label>Primary Color:</label>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="primary_color" checked="checked" name="primary_color" value="Black">
+                            <label>Black</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="primary_color" value="Blue">
+                            <label>Blue</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="primary_color" value="Brown">
+                            <label>Brown</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="primary_color" value="Gray">
+                            <label>Gray</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="primary_color" value="Green">
+                            <label>Green</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="primary_color" value="Orange">
+                            <label>Orange</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="primary_color" value="Pink">
+                            <label>Pink</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="primary_color" value="Purple">
+                            <label>Purple</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="primary_color" value="Red">
+                            <label>Red</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="primary_color" value="Silver">
+                            <label>Silver</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="primary_color" value="White">
+                            <label>White</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="primary_color" value="Yellow">
+                            <label>Yellow</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="inline fields">
+                    <label>Secondary Color:</label>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="secondary_color" checked="checked" name="primary_color" value="Black">
+                            <label>Black</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="secondary_color" value="Blue">
+                            <label>Blue</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="secondary_color" value="Brown">
+                            <label>Brown</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="secondary_color" value="Gray">
+                            <label>Gray</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="secondary_color" value="Green">
+                            <label>Green</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="secondary_color" value="Orange">
+                            <label>Orange</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="secondary_color" value="Pink">
+                            <label>Pink</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="secondary_color" value="Purple">
+                            <label>Purple</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="secondary_color" value="Red">
+                            <label>Red</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="secondary_color" value="Silver">
+                            <label>Silver</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="secondary_color" value="White">
+                            <label>White</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="secondary_color" value="Yellow">
+                            <label>Yellow</label>
+                        </div>
+                    </div>
+                </div>
+                <p>Image: <input type="file" name="img"></p>
+                {% if request.session.user_id %}
+                <button class="ui huge button loginBtn">Add Truck <i class="right arrow icon"></i></button>
+                {% else %}
+                <a class="ui inverted button loginBtn">Please login to add a truck</a>
+                {% endif %}
+                <!-- <input type="submit" value="Add Truck"> -->
+            </div>
+        </form>
+    </div>
+        <!-- end of form-->
+    <img class="ui fluid image" src="{% static 'truck_tracker/images/Max-d.jpg' %}">
+<!-- footer -->
+    <div class="ui inverted vertical footer segment">
+        <div class="ui container">
+            <div class="ui stackable inverted divided equal height stackable grid">
+                <div class="three wide column">
+                    <h4 class="ui inverted header">About</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">Sitemap</a>
+                        <a href="#" class="item">Created By R&R Software</a>
+                        <a href="#" class="item">Contact Us</a>
+                    </div>
+                </div>
+                <div class="five wide column">
+                    <h4 class="ui inverted header">Fun Facts</h4>
+                    <p class="item">JD currently has <span class="test"> {{total_trucks}}</span> unique trucks.</p>
+                    <p class="item">Favorite truck is Max-D</p>
+                    <p class="item">Most wanted truck is: Gas Monkey</p>
+                    <p class="item">Last added truck was a: <span><a href="/category/{{last_truck.category.category_name}}">{{last_truck.category.category_name}}</a></span> </p>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header">Truly Appreciated</h4>
+                    <p>Thanks to everyone who has purchased or helped search for a truck. Nothing like the expression of excitment on JD's face when he recives a new truck. He is one lucky boy to have you in his life.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of footer -->
+</body>
+
+</html>

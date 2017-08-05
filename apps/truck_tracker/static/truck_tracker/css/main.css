@@ -1,0 +1,47 @@
+h1 {
+    color: #67cd81;
+}
+.blk{
+    color: black;
+}
+
+.ui.button {
+    color: black;
+    background-color: #67cd81;
+}
+
+.ui.inverted.button {
+    box-shadow: 0 0 0 2px #67cd81 inset!important;
+    color: #67cd81;
+}
+
+.ui.secondary.inverted.pointing.menu .active.item {
+    border-bottom-color: #67cd81;
+}
+
+label {
+    color: #67cd81 inset!important;
+}
+
+div.equal.width.fields>div>label {
+    color: #67cd81;
+}
+
+li.error {
+    color: red;
+    list-style: none;
+    font-size: 1.2em;
+}
+
+div.five.wide.column>p>span {
+    color: #67cd81 !important;
+}
+
+div.five.wide.column>p>span>a {
+    color: #67cd81 !important;
+}
+
+body > div.ui.center.aligned.container{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

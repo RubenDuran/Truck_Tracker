@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{{category}}</title>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"> {% load staticfiles %}
+        <link rel="stylesheet" type="text/css" href="{% static 'truck_tracker/css/styles.css' %}" media="screen" title="no title" charset="utf-8">
+
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+
+        <script src="{% static 'truck_tracker/js/script.js' %}"></script>
+    </head>
+    <body>
+        <div class="ui center aligned container">
+        <header>
+            <ul>
+                <li><a href="/trucks">Trucks</a></li>
+                <li><a href="/add_truck">Add a Truck</a></li>
+                <li><a href="/">Sign Up</a></li>
+            </ul>
+        </header>
+
+        <h1>{{category}}</h1>
+
+
+
+        <div class="ui three column grid">
+
+  <div class="column">
+
+    <div class="ui fluid card">
+        {% for truck in trucks %}
+      <div class="image">
+        <img src="../media/{{truck.truck_color.document}}">
+      </div>
+      <div class="content">
+        <a class="header">Primary Color: {{truck.primary_color}}</a>
+        <a class="header">Secondary Color: {{truck.secondary_color}}</a>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+
+  </div>
+  </div>

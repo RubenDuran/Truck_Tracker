@@ -1,0 +1,93 @@
+<!-- begining of reg modal -->
+<div class="ui basic modal" id="reg">
+    <div class="ui icon header">
+        <i class="archive icon"></i> Register
+    </div>
+    <div class="content">
+        <div class="ui center aligned container">
+            <h4>Please sign up to add trucks and receive updates</h4>
+
+            <div class="ui form">
+                <form class="ui form" action="/register" method="POST">
+                    {% csrf_token %}
+                    <div class="equal width fields">
+                        <div class="field">
+                            <label>First Name</label>
+                            <input type="text" placeholder="First Name" name="f_name">
+                        </div>
+                        <div class="field">
+                            <label>Last Name</label>
+                            <input type="text" placeholder="Last Name" name="l_name">
+                        </div>
+                    </div>
+                    <div class="equal width fields">
+                        <div class="field">
+                            <label>Username</label>
+                            <input type="text" placeholder="Username" name='username'>
+                        </div>
+                        <div class="field">
+                            <label>Password</label>
+                            <input type="password" placeholder="Password" name='pw'>
+                        </div>
+                        <div class="field">
+                            <label>Confirm Password</label>
+                            <input type="password" placeholder="Confirm Password" name='pwconf'>
+                        </div>
+                    </div>
+                    <div class="equal width fields">
+                        <div class="field">
+                            <label>Phone Number</label>
+                            <input type="text" maxlength="3" placeholder="(XXX)" name="phone_one">
+                        </div>
+                        <div class="field">
+                            <label>~</label>
+                            <input type="text" maxlength="3" placeholder="(XXX)" name="phone_two">
+                        </div>
+                        <div class="field">
+                            <label>~</label>
+                            <input type="text" maxlength="4" placeholder="(XXXX)" name="phone_three">
+                        </div>
+                    </div>
+                    <div class="ui buttons">
+                        <button class="ui inverted button" type="reset" id="cancel">Cancel</button>
+                        <div class="or"></div>
+                        <button class="ui inverted button" type="submit">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of reg modal -->
+<!-- login modal -->
+<div class="ui basic modal" id="login">
+    <div class="ui icon header">
+        <i class="archive icon"></i> Login
+    </div>
+    <div class="content">
+        <div class="ui center aligned container">
+            <h4>Enter Username and Password to login.</h4>
+            <div class="ui form">
+                <form class="ui form" action="/login" method="POST">
+                    {% csrf_token %}
+                    <div class="equal width fields">
+                        <div class="field">
+                            <label>Username</label>
+                            <input type="text" placeholder="Username" name='username'>
+                        </div>
+                        <div class="field">
+                            <label>Password</label>
+                            <input type="password" placeholder="P assword" name='pw'>
+                        </div>
+                    </div>
+                    <div class="ui buttons">
+                        <button class="ui inverted button" type="reset" id="cancelBtn">Cancel</button>
+                        <div class="or"></div>
+                        <button class="ui inverted button" type="submit">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of login modal -->

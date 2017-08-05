@@ -1,0 +1,16 @@
+.body{
+    margin: 50px;
+}
+.left{
+    max-width: 50%;
+    display: inline-block;
+    text-align: left;
+    border-right: 1px solid grey;
+    padding: 20px;
+    margin: 20px;
+}
+.right{
+    max-width: 50%;
+    display: inline-block;
+    text-align: left;
+}

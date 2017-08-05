@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>JD's Monster Jam Truck Tracker</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"> {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'truck_tracker/css/main.css' %}" media="screen" charset="utf-8">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script src="{% static 'truck_tracker/js/script.js' %}"></script>
+
+</head>
+
+<body>
+    <!-- Page Contents -->
+    <div class="pusher">
+
+        <div class="ui inverted vertical masthead center aligned segment">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+            </ul>
+            {% endif %}
+
+            <div class="ui container">
+                <div class="ui large secondary inverted pointing menu">
+                    <a class="toc item">
+                      <i class="sidebar icon"></i>
+                    </a>
+                    <a class="active item">Home</a>
+                    <a class="item" href="/trucks">Trucks</a>
+                    <a class="item" href="/add_truck">Add a Truck</a>
+                    <!-- <a class="item">Careers</a> -->
+                    <div class="right item">
+                        {% if request.session.user_id %}
+                        <a class="ui inverted button loginBtn" href="/logout">logout</a>
+                        {% else %}
+                        <a class="ui inverted button loginBtn">Login</a>
+                        <a class="ui inverted button regBtn">Register</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui text container">
+                <h2>Welcome to</h2>
+                <h1>JD's Monster Jam Truck Tracker</h1>
+                <h3>Please sign up to add trucks and receive updates.</h3>
+                <button class="ui huge button loginBtn">Get Started <i class="right arrow icon"></i></button>
+            </div>
+        </div>
+    </div>
+    <!-- begining of modal -->
+    {% include "truck_tracker/modal.html" %}
+    <!-- end of modal -->
+
+    <!-- <div class="ui segment" id="pic"> -->
+    <!-- <img class="ui fluid image" src="{% static 'truck_tracker/images/GrnTruck.png' %}"> -->
+    <img class="ui fluid image" src="{% static 'truck_tracker/images/GDvsSoaD.jpg' %}">
+    <!-- </div> -->
+    <!-- footer -->
+    <div class="ui inverted vertical footer segment">
+        <div class="ui container">
+            <div class="ui stackable inverted divided equal height stackable grid">
+                <div class="three wide column">
+                    <h4 class="ui inverted header">About</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">Sitemap</a>
+                        <a href="#" class="item">Created By R&R Software</a>
+                        <a href="#" class="item">Contact Us</a>
+                    </div>
+                </div>
+                <div class="five wide column">
+                    <h4 class="ui inverted header">Fun Facts</h4>
+                    <p class="item">JD currently has <span class="test"> {{total_trucks}}</span> unique trucks.</p>
+                    <p class="item">His Favorite Truck is Max-D</p>
+                    <p class="item">His most wanted truck is: Gas Monkey</p>
+                    <p class="item">Last added truck was a: <span class="grn"><a href="/category/{{last_truck.category.category_name}}">{{last_truck.category.category_name}}</a></span> </p>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header">Truly Appreciated</h4>
+                    <p>Thanks to everyone who has purchased or helped search for a truck. Nothing like the expression of excitment on JD's face when he recives a new truck. He is one lucky boy to have you in his life.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- end of footer -->
+</body>
+
+</html>
