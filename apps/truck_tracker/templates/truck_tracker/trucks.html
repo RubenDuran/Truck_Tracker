@@ -36,13 +36,27 @@
                     <a class="active item" href="/trucks">Trucks</a>
                     <a class="item" href="/add_truck">Add a Truck</a>
                     <!-- <a class="item">Careers</a> -->
+
                     <div class="right item">
+                        <div class="ui grid mobile hidden">
                         {% if request.session.user_id %}
-                        <a class="ui inverted button loginBtn" href="/logout">logout</a> {% else %}
+                        <a class="ui inverted button loginBtn" href="/logout">logout</a>
+                        {% else %}
                         <a class="ui inverted button loginBtn">Login</a>
-                        <a class="ui inverted button regBtn">Register</a> {% endif %}
+                        <a class="ui inverted button regBtn">Register</a>
+                        {% endif %}
                     </div>
+                    </div>
+
                 </div>
+            </div>
+            <div class="ui inverted grid center mobile only menu">
+                {% if request.session.user_id %}
+                <a class="ui inverted button loginBtn" href="/logout">logout</a>
+                {% else %}
+                <a class="ui inverted button loginBtn">Login</a>
+                <a class="ui inverted button regBtn">Register</a>
+                {% endif %}
             </div>
 
             <div class="ui text container">
