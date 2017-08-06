@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>JD's Monster Jam Truck Tracker</title>
@@ -37,11 +38,9 @@
                     <!-- <a class="item">Careers</a> -->
                     <div class="right item">
                         {% if request.session.user_id %}
-                        <a class="ui inverted button loginBtn" href="/logout">logout</a>
-                        {% else %}
+                        <a class="ui inverted button loginBtn" href="/logout">logout</a> {% else %}
                         <a class="ui inverted button loginBtn">Login</a>
-                        <a class="ui inverted button regBtn">Register</a>
-                        {% endif %}
+                        <a class="ui inverted button regBtn">Register</a> {% endif %}
                     </div>
                 </div>
             </div>
@@ -51,7 +50,7 @@
                 <h3>Select a category to view the specific trucks in the collection.</h3>
                 <form method="POST" action="/add_truck">
                     {% csrf_token %}
-                <button class="ui huge button addBtn">Add a Truck <i class="right arrow icon"></i></button>
+                    <button class="ui huge button addBtn">Add a Truck <i class="right arrow icon"></i></button>
                 </form>
             </div>
         </div>
@@ -59,14 +58,15 @@
     <!-- begining of modal -->
     {% include "truck_tracker/modal.html" %}
     <!-- end of modal -->
-    <!-- begining of grid -->
 
-        <div class="ui center aligned container">
-            <h1 class="blk">Categories</h1>
-            <div class="ui three column stackable grid">
+    <div class="ui center aligned container">
+        <h1 class="blk">Categories</h1>
+
+
+        <div class="ui one column grid mobile only">
 
             {% for category in truck_categories %}
-              <div class="column">
+            <div class="column">
                 <div class="ui segment">
                     <div class="ui fluid image">
                         <a href="category/{{category.category_name}}"><img src="{{category.image_url}}"></a>
@@ -74,43 +74,91 @@
 
                     </div>
                     <span>{{category.number_of_trucks}}</span>
-                  <img>
+                    <img>
                 </div>
-              </div>
-              {% endfor %}
+            </div>
+            {% endfor %}
 
-             <!-- end of ui three column grid div -->
-          </div>
-          <!-- end of main div -->
+            <!-- end of ui three column grid div -->
         </div>
-        <!-- footer -->
-        <div class="ui inverted vertical footer segment">
-            <div class="ui container">
-                <div class="ui stackable inverted divided equal height stackable grid">
-                    <div class="three wide column">
-                        <h4 class="ui inverted header">About</h4>
-                        <div class="ui inverted link list">
-                            <a href="#" class="item">Sitemap</a>
-                            <a href="#" class="item">Created By R&R Software</a>
-                            <a href="#" class="item">Contact Us</a>
-                        </div>
+
+        <!-- begining of grid -->
+
+
+        <div class="ui two column stackable grid tablet only">
+
+            {% for category in truck_categories %}
+            <div class="column">
+                <div class="ui segment">
+                    <div class="ui fluid image">
+                        <a href="category/{{category.category_name}}"><img src="{{category.image_url}}"></a>
+                        <div class="ui bottom attached label">{{category.category_name}}</div>
+
                     </div>
-                    <div class="five wide column">
-                        <h4 class="ui inverted header">Fun Facts</h4>
-                        <p class="item">JD currently has <span class="test"> {{total_trucks}}</span> unique trucks.</p>
-                        <p class="item">His Favorite Truck is Max-D</p>
-                        <p class="item">His most wanted truck is: Gas Monkey</p>
-                        <p class="item">Last added truck was a: <span><a href="/category/{{last_truck.category.category_name}}">{{last_truck.category.category_name}}</a></span> </p>
+                    <span>{{category.number_of_trucks}}</span>
+                    <img>
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- end of ui three column grid div -->
+        </div>
+        <!-- test -->
+
+        <!-- begining of grid -->
+
+
+        <div class="ui three column stackable grid computer only">
+
+            {% for category in truck_categories %}
+            <div class="column">
+                <div class="ui segment">
+                    <div class="ui fluid image">
+                        <a href="category/{{category.category_name}}"><img src="{{category.image_url}}"></a>
+                        <div class="ui bottom attached label">{{category.category_name}}</div>
+
                     </div>
-                    <div class="seven wide column">
-                        <h4 class="ui inverted header">Truly Appreciated</h4>
-                        <p>Thanks to everyone who has purchased or helped search for a truck. Nothing like the expression of excitment on JD's face when he recives a new truck. He is one lucky boy to have you in his life.</p>
+                    <span>{{category.number_of_trucks}}</span>
+                    <img>
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- end of ui three column grid div -->
+        </div>
+        <!-- test -->
+
+        <!-- end of main div -->
+    </div>
+    <!-- footer -->
+    <div class="ui inverted vertical footer segment">
+        <div class="ui container">
+            <div class="ui stackable inverted divided equal height stackable grid">
+                <div class="three wide column">
+                    <h4 class="ui inverted header">About</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">Sitemap</a>
+                        <a href="#" class="item">Created By R&R Software</a>
+                        <a href="#" class="item">Contact Us</a>
                     </div>
+                </div>
+                <div class="five wide column">
+                    <h4 class="ui inverted header">Fun Facts</h4>
+                    <p class="item">JD currently has <span class="test"> {{total_trucks}}</span> unique trucks.</p>
+                    <p class="item">His Favorite Truck is Max-D</p>
+                    <p class="item">His most wanted truck is: Gas Monkey</p>
+                    <p class="item">Last added truck was a: <span><a href="/category/{{last_truck.category.category_name}}">{{last_truck.category.category_name}}</a></span> </p>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header">Truly Appreciated</h4>
+                    <p>Thanks to everyone who has purchased or helped search for a truck. Nothing like the expression of excitment on JD's face when he recives a new truck. He is one lucky boy to have you in his life.</p>
                 </div>
             </div>
         </div>
-        </div>
-        <!-- end of footer -->
+    </div>
+    </div>
+    <!-- end of footer -->
 
-    </body>
+</body>
+
 </html>
