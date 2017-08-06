@@ -45,3 +45,12 @@ body > div.ui.center.aligned.container{
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+/*body > div.ui.center.aligned.container > form > div > div > div > div {
+    display: inline-block;
+}*/
+div.halfer{
+    max-width: 50%;
+    display: inline-block;
+    text-align: left;
+}
