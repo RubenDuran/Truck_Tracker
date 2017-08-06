@@ -62,7 +62,7 @@
     <!-- grid -->
     <div class="ui center aligned container">
         <h2>{{category}}</h2>
-        <div class="ui three column grid">
+        <div class="ui three column stackable grid computer only">
             {% for truck in trucks %}
             <div class="column">
                 <div class="ui fluid card">
@@ -77,6 +77,24 @@
             </div>
             {% endfor %}
         </div>
+        <!-- end of computer -->
+        <div class="ui one column stackable grid tablet only">
+            {% for truck in trucks %}
+            <div class="column">
+                <div class="ui fluid card">
+                    <div class="image">
+                        <img src="../media/{{truck.truck_color.document}}">
+                    </div>
+                    <div class="content">
+                        <a class="header">Primary Color: {{truck.primary_color}}</a>
+                        <a class="header">Secondary Color: {{truck.secondary_color}}</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- end of tablet -->
     </div>
         <!-- end of grid -->
 <!-- footer -->
