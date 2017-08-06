@@ -68,6 +68,8 @@
                 <option value="{{category.category_name}}">{{category.category_name}}</option>
                 {% endfor %}
                 </select>
+                <div class="ui stackable grid">
+                    <div class="column">
 
                 <div class="inline fields">
                     <label>Primary Color:</label>
@@ -144,6 +146,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="ui stackable grid">
+            <div class="column">
                 <div class="inline fields">
                     <label>Secondary Color:</label>
                     <div class="field">
@@ -219,9 +225,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
                 <p>Image: <input type="file" name="img"></p>
                 {% if request.session.user_id %}
-                <button class="ui huge button loginBtn">Add Truck <i class="right arrow icon"></i></button>
+                <button class="ui huge button">Add Truck <i class="right arrow icon"></i></button>
                 {% else %}
                 <a class="ui inverted button loginBtn">Please login to add a truck</a>
                 {% endif %}
