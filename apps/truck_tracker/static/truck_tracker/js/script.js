@@ -26,4 +26,22 @@ $(document).ready(function() {
         $('#login')
             .modal('show')
     });
+
+    $("#tc").keyup(function(e) {
+        var tcInput = this.value;
+        console.log(tcInput);
+        e.preventDefault()
+        $.ajax({
+            url: '/search',
+            method: 'GET',
+            data: $(this).serialize(),
+            success: function(serverResponse) {
+                // console.log("Received this from server: ", serverResponse)
+                $('.theSearch').html(serverResponse)
+            }
+        })
+
+    })
+
+
 });

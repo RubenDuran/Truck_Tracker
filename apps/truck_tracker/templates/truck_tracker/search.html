@@ -1,0 +1,67 @@
+
+<div class="search">
+    <div class="ui one column stackable grid mobile only">
+
+        {% for category in truck_categories %}
+        <div class="column">
+            <div class="ui segment">
+                <div class="ui fluid image">
+                    <a href="category/{{category.category_name}}"><img src="{{category.image_url}}"></a>
+                    <div class="ui bottom attached label">{{category.category_name}}</div>
+
+                </div>
+                <span><strong>{{category.number_of_trucks}}</strong></span>
+                <img>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- end of ui three column grid div -->
+    </div>
+
+    <!-- begining of grid -->
+
+
+    <div class="ui one column stackable grid tablet only">
+
+        {% for category in truck_categories %}
+        <div class="column">
+            <div class="ui segment">
+                <div class="ui fluid image">
+                    <a href="category/{{category.category_name}}"><img src="{{category.image_url}}"></a>
+                    <div class="ui bottom attached label">{{category.category_name}}</div>
+
+                </div>
+                <span><strong>{{category.number_of_trucks}}</strong></span>
+                <img>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- end of ui three column grid div -->
+    </div>
+    <!-- test -->
+
+    <!-- begining of grid -->
+
+
+    <div class="ui three column stackable grid computer only">
+
+        {% for category in truck_categories %}
+        <div class="column">
+            <div class="ui segment">
+                <div class="ui fluid image">
+                    <a href="category/{{category.category_name}}"><img src="{{category.image_url}}"></a>
+                    <div class="ui bottom attached label">{{category.category_name}}</div>
+
+                </div>
+                <span>{{category.number_of_trucks}}</span>
+                <img>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- end of ui three column grid div -->
+    </div>
+    <!-- test -->
+</div>

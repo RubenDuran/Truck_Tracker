@@ -32,6 +32,21 @@ def trucks(request):
     }
     return render(request, 'truck_tracker/trucks.html', context)
 
+
+# Author.objects.filter(name__unaccent__icontains='Helen')
+def search(request):
+    print "the request:"
+    print request
+    print "the request.GET:"
+    print request.GET
+    truck_categories = Category.objects.filter(category_name__icontains=request.GET["search"]).annotate(number_of_trucks=Count('truck')).order_by('category_name')
+    print truck_categories
+    context = {
+        'truck_categories': truck_categories,
+    }
+    return render(request, 'truck_tracker/search.html', context)
+
+
 def add_truck(request):
     last_truck  = Truck.objects.latest('created_at')
     total_trucks = Truck.objects.count()
@@ -119,8 +134,8 @@ def login(request):
             return redirect('/add_truck')
         return redirect('/')
 
-def search(request):
-    return redirect('/specific_truck')
+# def search(request):
+#     return redirect('/specific_truck')
 
 def category(request, id):
 

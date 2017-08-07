@@ -39,24 +39,20 @@
 
                     <div class="right item">
                         <div class="ui grid mobile hidden">
-                        {% if request.session.user_id %}
-                        <a class="ui inverted button loginBtn" href="/logout">logout</a>
-                        {% else %}
-                        <a class="ui inverted button loginBtn">Login</a>
-                        <a class="ui inverted button regBtn">Register</a>
-                        {% endif %}
-                    </div>
+                            {% if request.session.user_id %}
+                            <a class="ui inverted button loginBtn" href="/logout">logout</a> {% else %}
+                            <a class="ui inverted button loginBtn">Login</a>
+                            <a class="ui inverted button regBtn">Register</a> {% endif %}
+                        </div>
                     </div>
 
                 </div>
             </div>
             <div class="ui inverted grid center mobile only menu">
                 {% if request.session.user_id %}
-                <a class="ui inverted button loginBtn" href="/logout">logout</a>
-                {% else %}
+                <a class="ui inverted button loginBtn" href="/logout">logout</a> {% else %}
                 <a class="ui inverted button loginBtn">Login</a>
-                <a class="ui inverted button regBtn">Register</a>
-                {% endif %}
+                <a class="ui inverted button regBtn">Register</a> {% endif %}
             </div>
 
             <div class="ui text container">
@@ -73,8 +69,24 @@
     {% include "truck_tracker/modal.html" %}
     <!-- end of modal -->
 
+
     <div class="ui center aligned container">
         <h1 class="blk">Categories</h1>
+
+        <!-- search -->
+        <form action="search" method="GET">
+            {% csrf_token %}
+
+            <div class="ui category search">
+                <div class="ui icon input">
+                    <input class="prompt" placeholder="Search categories..." type="text" id="tc" name="search">
+                    <i class="search icon"></i>
+                </div>
+                <div class="results"></div>
+            </div>
+        </form>
+        <!-- end of search -->
+        <div class="theSearch">
 
 
         <div class="ui one column stackable grid mobile only">
@@ -139,6 +151,7 @@
             {% endfor %}
 
             <!-- end of ui three column grid div -->
+        </div>
         </div>
         <!-- test -->
 
