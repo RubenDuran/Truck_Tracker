@@ -29,7 +29,8 @@ $(document).ready(function() {
 
     $("#tc").keyup(function(e) {
         var tcInput = this.value;
-        console.log(tcInput);
+        console.log("testing",tcInput);
+
         e.preventDefault()
         $.ajax({
             url: '/search',
