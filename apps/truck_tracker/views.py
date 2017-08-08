@@ -70,9 +70,17 @@ def add(request):
         img = request.FILES['img']
         print img
         user = User.objects.get(pk = request.session['user_id'])
+        users = User.objects.all()
 
         truck = Truck.objects.create(user=user, category=category, document= img)
         color = Color.objects.create(primary_color=p_color, secondary_color=s_color,truck_color=truck)
+
+        for _ in users:
+            twilio.client.messages.create(
+                to = _.phone,
+                from_= "+14803728939",
+                body="New {} Truck Added by: {}.".format(category.category_name, user.username),
+                media_url=["http://jacobduran.com/media/documents/{}".format(img)])
 
         # errors = Truck.objects.validate(request.POST)
         # if errors:
