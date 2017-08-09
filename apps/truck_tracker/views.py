@@ -50,7 +50,7 @@ def search(request):
 def add_truck(request):
     last_truck  = Truck.objects.latest('created_at')
     total_trucks = Truck.objects.count()
-    truck_categories = Category.objects.all()
+    truck_categories = Category.objects.all().order_by('category_name')
     context = {
         'truck_categories': truck_categories,
         'last_truck': last_truck,
