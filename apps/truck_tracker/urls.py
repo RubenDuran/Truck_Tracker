@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^trucks$', views.trucks),
     url(r'^add_truck$', views.add_truck),
     url(r'^add$', views.add),
+    url(r'^find$', views.find),
     url(r'^delete$', views.delete),
     url(r'^logout$', views.logout),
     url(r'^login$', views.login),

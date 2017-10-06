@@ -4,12 +4,13 @@ from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 from django.db.models import Count
 from . models import User, Truck, Category, Color
-import bcrypt, urllib
+import bcrypt
+import urllib
 from . import twilio_config as twilio
 
 
 def index(request):
-    last_truck  = Truck.objects.latest('created_at')
+    last_truck = Truck.objects.latest('created_at')
     total_trucks = Truck.objects.count()
     print last_truck.category.category_name
     print total_trucks
@@ -19,11 +20,13 @@ def index(request):
     }
     return render(request, 'truck_tracker/index.html', context)
 
+
 def trucks(request):
-    last_truck  = Truck.objects.latest('created_at')
+    last_truck = Truck.objects.latest('created_at')
     total_trucks = Truck.objects.count()
     # truck_categories = Category.objects.all()
-    truck_categories = Category.objects.annotate(number_of_trucks=Count('truck')).order_by('category_name')
+    truck_categories = Category.objects.annotate(
+        number_of_trucks=Count('truck')).order_by('category_name')
     print truck_categories[0].number_of_trucks
     context = {
         'truck_categories': truck_categories,
@@ -39,7 +42,8 @@ def search(request):
     print request
     print "the request.GET:"
     print request.GET
-    truck_categories = Category.objects.filter(category_name__icontains=request.GET["search"]).annotate(number_of_trucks=Count('truck')).order_by('category_name')
+    truck_categories = Category.objects.filter(category_name__icontains=request.GET[
+                                               "search"]).annotate(number_of_trucks=Count('truck')).order_by('category_name')
     print truck_categories
     context = {
         'truck_categories': truck_categories,
@@ -48,7 +52,7 @@ def search(request):
 
 
 def add_truck(request):
-    last_truck  = Truck.objects.latest('created_at')
+    last_truck = Truck.objects.latest('created_at')
     total_trucks = Truck.objects.count()
     truck_categories = Category.objects.all().order_by('category_name')
     context = {
@@ -57,6 +61,7 @@ def add_truck(request):
         'total_trucks': total_trucks
     }
     return render(request, 'truck_tracker/add.html', context)
+
 
 def add(request):
     user_id = request.session.get('user_id')
@@ -69,17 +74,20 @@ def add(request):
         s_color = request.POST['secondary_color']
         img = request.FILES['img']
         print img
-        user = User.objects.get(pk = request.session['user_id'])
+        user = User.objects.get(pk=request.session['user_id'])
         users = User.objects.all()
 
-        truck = Truck.objects.create(user=user, category=category, document= img)
-        color = Color.objects.create(primary_color=p_color, secondary_color=s_color,truck_color=truck)
+        truck = Truck.objects.create(
+            user=user, category=category, document=img)
+        color = Color.objects.create(primary_color=p_color,
+                                     secondary_color=s_color, truck_color=truck)
 
         for _ in users:
             twilio.client.messages.create(
-                to = _.phone,
-                from_= "+14803728939",
-                body="New {} Truck Added by: {}.".format(category.category_name, user.username),
+                to=_.phone,
+                from_="+14803728939",
+                body="New {} Truck Added by: {}.".format(
+                    category.category_name, user.username),
                 media_url=["http://jacobduran.com/media/documents/{}".format(img)])
 
         # errors = Truck.objects.validate(request.POST)
@@ -89,15 +97,17 @@ def add(request):
         # else:
         #     print request.POST['category']
 
-
     return redirect('/category/{}'.format(category.category_name))
+
 
 def delete(request):
     return redirect('/trucks')
 
+
 def logout(request):
     del request.session['user_id']
     return redirect('/')
+
 
 def register(request):
     if request.method == 'POST':
@@ -110,7 +120,8 @@ def register(request):
             hashed = bcrypt.hashpw(
                 request.POST['pw'].encode(), bcrypt.gensalt())
 
-            user_phone = "+1"+str(request.POST['phone_one'])+str(request.POST['phone_two'])+str(request.POST['phone_three'])
+            user_phone = "+1" + str(request.POST['phone_one']) + str(
+                request.POST['phone_two']) + str(request.POST['phone_three'])
             print user_phone
 
             User.objects.create(f_name=request.POST['f_name'], l_name=request.POST['l_name'], username=request.POST[
@@ -121,11 +132,13 @@ def register(request):
             request.session['user_id'] = user.id
 
             twilio.client.messages.create(
-                to = user_phone,
-                from_= "+14803728939",
-                body="Thanks for signing up! You'll receive a notification everytime a new truck gets added")
+                to=user_phone,
+                from_="+14803728939",
+                body="Thanks for signing up! You'll receive a notification" +
+                "everytime a new truck gets added. - http://jacobduran.com")
             return redirect('/trucks')
     return redirect('/')
+
 
 def login(request):
     if request.method == 'POST':
@@ -142,29 +155,16 @@ def login(request):
             return redirect('/add_truck')
         return redirect('/')
 
-# def search(request):
-#     return redirect('/specific_truck')
 
 def category(request, id):
 
-    last_truck  = Truck.objects.latest('created_at')
+    last_truck = Truck.objects.latest('created_at')
     total_trucks = Truck.objects.count()
 
     category = urllib.unquote(id).decode('utf8')
     print category
-    trucks = Color.objects.filter(truck_color__category__category_name = category)
-
-    # images = Image.objects.all()
-    # for image in images:
-    #     print image.truck_pic
-    #     print image.document
-    #     print image.truck_pic.pk
-    # for truck in trucks:
-    #     print truck.truck_color.images.image__document
-
-
-
-
+    trucks = Color.objects.filter(
+        truck_color__category__category_name=category)
     context = {
         'category': category,
         'trucks': trucks,
@@ -172,10 +172,12 @@ def category(request, id):
         'total_trucks': total_trucks
     }
 
-    return render(request,'truck_tracker/category.html', context)
+    return render(request, 'truck_tracker/category.html', context)
 
-def specific_truck(request,id,truck_id):
+
+def specific_truck(request, id, truck_id):
     return render(request, 'truck_tracker/truck.html')
 
-# if settings.DEBUG:
-#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+def find(request):
+    return render(request, 'truck_tracker/find.html')

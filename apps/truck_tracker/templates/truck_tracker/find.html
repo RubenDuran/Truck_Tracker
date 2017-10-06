@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>JD's Monster Jam Truck Tracker</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"> {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'truck_tracker/css/main.css' %}" media="screen" charset="utf-8">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script src="{% static 'truck_tracker/js/script.js' %}"></script>
+
+</head>
+
+<body>
+    <div class="pusher">
+
+        <div class="ui inverted vertical masthead center aligned segment">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+            </ul>
+            {% endif %}
+
+            <div class="ui container">
+                <div class="ui large secondary inverted pointing menu">
+                    <a class="toc item">
+                      <i class="sidebar icon"></i>
+                    </a>
+                    <a class="item" href="/">Home</a>
+                    <a class="item" href="/trucks">Trucks</a>
+                    <a class="item" href="/add_truck">Add a Truck</a>
+                    <a class="active item" href="/find">Play</a>
+                    <!-- <a class="item">Careers</a> -->
+                    <div class="right item">
+                        {% if request.session.user_id %}
+                        <a class="ui inverted button loginBtn" href="/logout">logout</a>
+                        {% else %}
+                        <a class="ui inverted button loginBtn">Login</a>
+                        <a class="ui inverted button regBtn">Register</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui text container">
+                <!-- <h2>Welcome to</h2> -->
+                <h1>JD's Monster Jam Truck Tracker</h1>
+                <h3>Click button to find new truck.</h3>
+                <button class="ui huge button loginBtn">Find <i class="right arrow icon"></i></button>
+            </div>
+        </div>
+    </div>
+    <!-- grid -->
+    <div class="ui center aligned container">
+        <h2>{{category}}</h2>
+        <div class="ui three column stackable grid computer only">
+            {% for truck in trucks %}
+            <div class="column">
+                <div class="ui fluid card">
+                    <div class="image">
+                        <img src="../media/{{truck.truck_color.document}}">
+                    </div>
+                    <div class="content">
+                        <a class="header">Primary Color: {{truck.primary_color}}</a>
+                        <a class="header">Secondary Color: {{truck.secondary_color}}</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- end of computer -->
+        <div class="ui one column stackable grid tablet only">
+            {% for truck in trucks %}
+            <div class="column">
+                <div class="ui fluid card">
+                    <div class="image">
+                        <img src="../media/{{truck.truck_color.document}}">
+                    </div>
+                    <div class="content">
+                        <a class="header">Primary Color: {{truck.primary_color}}</a>
+                        <a class="header">Secondary Color: {{truck.secondary_color}}</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- end of tablet -->
+    </div>
+        <!-- end of grid -->
+
+
+
+    <img class="ui fluid image" src="{% static 'truck_tracker/images/GM-Jump.JPG' %}">
+    {% include "truck_tracker/footer.html" %}
+    <!-- end of footer -->
+</body>
+
+</html>
