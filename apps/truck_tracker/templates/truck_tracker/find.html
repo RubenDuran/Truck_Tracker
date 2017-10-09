@@ -11,6 +11,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
     <script src="{% static 'truck_tracker/js/script.js' %}"></script>
+    <script src="{% static 'truck_tracker/js/finderScript.js' %}"></script>
 
 </head>
 
@@ -50,15 +51,28 @@
             <div class="ui text container">
                 <!-- <h2>Welcome to</h2> -->
                 <h1>JD's Monster Jam Truck Tracker</h1>
-                <h3>Click button to find new truck.</h3>
-                <button class="ui huge button loginBtn">Find <i class="right arrow icon"></i></button>
+                <h3>Click the button to find a new truck.</h3>
+                <form method="POST" action="/find">
+                    {% csrf_token %}
+                <button class="ui huge button" id="finder-btn">Find <i class="right arrow icon"></i></button>
+                </form>
             </div>
         </div>
     </div>
     <!-- grid -->
     <div class="ui center aligned container">
-        <h2>{{category}}</h2>
-        <div class="ui three column stackable grid computer only">
+        <!-- <h2>{{category}}</h2> -->
+        <h2>Please find</h2>
+        <div class="ui raised very padded text container segment">
+            <!-- trucks.1.primary_color -->
+
+      <h2 class="ui header" id="finder-text">The {{truck.primary_color}} and {{truck.secondary_color}} {{truck.truck_color.category.category_name}} </h2>
+      <img class="ui fluid image" id="finder-img" src="../media/{{truck.truck_color.document}}">
+      <p></p>
+      <p>Press the find button to look for a new truck.</p>
+    </div>
+    <!-- testing this div -->
+        <!-- <div class="ui three column stackable grid computer only">
             {% for truck in trucks %}
             <div class="column">
                 <div class="ui fluid card">
@@ -74,7 +88,7 @@
             {% endfor %}
         </div>
         <!-- end of computer -->
-        <div class="ui one column stackable grid tablet only">
+        <!-- <div class="ui one column stackable grid tablet only">
             {% for truck in trucks %}
             <div class="column">
                 <div class="ui fluid card">
@@ -88,11 +102,12 @@
                 </div>
             </div>
             {% endfor %}
-        </div>
+        </div> -->
 
         <!-- end of tablet -->
-    </div>
+    </div> -->
         <!-- end of grid -->
+        {% include "truck_tracker/modal.html" %}
 
 
 

@@ -180,4 +180,17 @@ def specific_truck(request, id, truck_id):
 
 
 def find(request):
-    return render(request, 'truck_tracker/find.html')
+    last_truck = Truck.objects.latest('created_at')
+    total_trucks = Truck.objects.count()
+
+    # category = urllib.unquote(id).decode('utf8')
+    # print category
+    truck = Color.objects.all().order_by('?')[0]
+    context = {
+        # 'category': category,
+        'truck': truck,
+        'last_truck': last_truck,
+        'total_trucks': total_trucks
+    }
+
+    return render(request, 'truck_tracker/find.html', context)
